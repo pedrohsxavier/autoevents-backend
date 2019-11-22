@@ -34,4 +34,5 @@ public class Evento {
 
     @ManyToOne
     @JoinColumn(name = "montadora_id", foreignKey = @ForeignKey(name = "fk_montadora_usuario_id"))
+    private Montadora montadora;
 }

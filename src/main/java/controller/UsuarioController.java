@@ -32,7 +32,12 @@ public class UsuarioController {
         return ResponseEntity.ok(UsuarioResponse.from(usuarios));
     }
 
-
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioResponse> atualizarUsuario(@Valid @PathVariable(value = "id") Long id,
+                                                            @Valid @RequestBody UsuarioRequest request) {
+        Usuario usuario = this.service.atualizarUsuario(id, request);
+        return ResponseEntity.ok(UsuarioResponse.from(usuario));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerUsuario(@Valid @PathVariable(value = "id") Long id) {

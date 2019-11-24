@@ -1,6 +1,6 @@
-package repository;
+package com.br.edu.ifpb.deps.autoevents.repository;
 
-import model.Usuario;
+import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

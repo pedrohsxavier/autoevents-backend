@@ -1,4 +1,4 @@
-package dto.request;
+package com.br.edu.ifpb.deps.autoevents.dto.request;
 
 import lombok.Data;
 

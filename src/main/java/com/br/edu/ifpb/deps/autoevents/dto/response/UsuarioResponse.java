@@ -1,7 +1,7 @@
-package dto.response;
+package com.br.edu.ifpb.deps.autoevents.dto.response;
 
 import lombok.Data;
-import model.Usuario;
+import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import org.springframework.data.domain.Page;
 
 import java.util.Date;

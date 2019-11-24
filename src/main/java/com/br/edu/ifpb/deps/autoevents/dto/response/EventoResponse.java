@@ -1,7 +1,7 @@
-package dto.response;
+package com.br.edu.ifpb.deps.autoevents.dto.response;
 
 import lombok.Data;
-import model.Evento;
+import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;

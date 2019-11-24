@@ -1,6 +1,6 @@
-package repository;
+package com.br.edu.ifpb.deps.autoevents.repository;
 
-import model.Carro;
+import com.br.edu.ifpb.deps.autoevents.model.Carro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CarroRepository extends JpaRepository<Carro, Long> {

@@ -1,7 +1,6 @@
-package dto.request;
+package com.br.edu.ifpb.deps.autoevents.dto.request;
 
 import lombok.Data;
-import model.Montadora;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package model;
+package com.br.edu.ifpb.deps.autoevents.model;
 
 import lombok.Data;
 

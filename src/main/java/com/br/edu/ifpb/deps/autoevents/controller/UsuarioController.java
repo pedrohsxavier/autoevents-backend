@@ -1,13 +1,13 @@
-package controller;
+package com.br.edu.ifpb.deps.autoevents.controller;
 
-import dto.request.UsuarioRequest;
-import dto.response.UsuarioResponse;
-import model.Usuario;
+import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.response.UsuarioResponse;
+import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.UsuarioService;
+import com.br.edu.ifpb.deps.autoevents.service.UsuarioService;
 
 import javax.validation.Valid;
 

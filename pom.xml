@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from com.br.edu.ifpb.deps.autoevents.repository -->
 	</parent>
 	<groupId>com.br.edu.ifpb.deps</groupId>
 	<artifactId>autoevents</artifactId>

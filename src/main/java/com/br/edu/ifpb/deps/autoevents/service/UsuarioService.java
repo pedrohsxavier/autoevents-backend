@@ -1,13 +1,13 @@
-package service;
+package com.br.edu.ifpb.deps.autoevents.service;
 
-import dto.request.UsuarioRequest;
-import model.Usuario;
+import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
+import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import repository.UsuarioRepository;
+import com.br.edu.ifpb.deps.autoevents.repository.UsuarioRepository;
 
 import java.util.Optional;
 

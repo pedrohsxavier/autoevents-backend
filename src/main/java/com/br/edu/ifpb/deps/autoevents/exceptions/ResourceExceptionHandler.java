@@ -1,4 +1,4 @@
-package exceptions;
+package com.br.edu.ifpb.deps.autoevents.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

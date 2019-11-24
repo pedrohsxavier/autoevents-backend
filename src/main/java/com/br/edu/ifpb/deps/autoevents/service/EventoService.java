@@ -1,13 +1,13 @@
-package service;
+package com.br.edu.ifpb.deps.autoevents.service;
 
-import dto.request.EventoRequest;
-import model.Evento;
+import com.br.edu.ifpb.deps.autoevents.dto.request.EventoRequest;
+import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import repository.EventoRepository;
+import com.br.edu.ifpb.deps.autoevents.repository.EventoRepository;
 
 @Service
 public class EventoService {

@@ -11,7 +11,7 @@ public class EventoRequest {
     private String cidade;
     private String pais;
     private Long usuarioId;
-    private Long montadoraId;
+    //private Long montadoraId;
     private LocalDateTime dataEvento;
     private BigDecimal ingressoValor;
 }

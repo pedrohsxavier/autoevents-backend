@@ -27,6 +27,9 @@ public class Evento {
     @Column(nullable = false)
     private double ingressoValor;
 
+    @Column(nullable = false)
+    private String descricao;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_evento_usuario_id"))
     private Usuario usuario;

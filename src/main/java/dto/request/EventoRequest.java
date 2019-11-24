@@ -13,5 +13,5 @@ public class EventoRequest {
     private Long usuarioId;
     private Long montadoraId;
     private LocalDateTime dataEvento;
-    private BigDecimal valor;
+    private BigDecimal ingressoValor;
 }

@@ -28,7 +28,7 @@ public class EventoResponse {
         eventoResponse.setId(evento.getId());
         eventoResponse.setIngressoValor(evento.getIngressoValor());
         eventoResponse.setMontadoraId(evento.getMontadora().getId());
-        eventoResponse.setUsuarioId(evento.getUsuario().getUsuarioId());
+        eventoResponse.setUsuarioId(evento.getUsuario().getId());
 
         return eventoResponse;
     }
@@ -44,7 +44,7 @@ public class EventoResponse {
             eventoResponse.setId(evento.getId());
             eventoResponse.setIngressoValor(evento.getIngressoValor());
             eventoResponse.setMontadoraId(evento.getMontadora().getId());
-            eventoResponse.setUsuarioId(evento.getUsuario().getUsuarioId());
+            eventoResponse.setUsuarioId(evento.getUsuario().getId());
 
             return eventoResponse;
         });

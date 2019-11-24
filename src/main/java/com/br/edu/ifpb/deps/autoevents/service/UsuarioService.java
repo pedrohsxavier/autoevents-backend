@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import com.br.edu.ifpb.deps.autoevents.repository.UsuarioRepository;
 
-import java.util.Optional;
+import java.time.LocalDate;
 
 @Service
 public class UsuarioService {
@@ -20,32 +20,36 @@ public class UsuarioService {
     }
 
     public Usuario criarUsuario(UsuarioRequest request) {
-        Usuario usuario = this.usuarioRepository.findByEmail(request.getEmail()).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "E-mail já cadastrado na base de dados"));
+        Usuario usuario = new Usuario();
 
-        usuario.setDataNascimento(request.getDataNascimento());
+        if (request.getDataNascimento().compareTo(LocalDate.now()) > 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data inválida para ser cadastrada.");
+        } else {
+            usuario.setDataNascimento(request.getDataNascimento());
+        }
+
         usuario.setEmail(request.getEmail());
         usuario.setNome(request.getNome());
         usuario.setSenha(request.getSenha());
 
-        return usuario;
+        return this.usuarioRepository.save(usuario);
     }
 
     public Usuario atualizarUsuario(Long id, UsuarioRequest request) {
         Usuario usuario = this.usuarioRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
-        Optional<Usuario> busca = this.usuarioRepository.findByEmail(request.getEmail());
-
-        if(!busca.isPresent()) {
-            usuario.setEmail(request.getEmail());
+        if (request.getDataNascimento().compareTo(LocalDate.now()) > 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data inválida para ser alterada");
+        } else {
+            usuario.setDataNascimento(request.getDataNascimento());
         }
 
-        usuario.setDataNascimento(request.getDataNascimento());
         usuario.setNome(request.getNome());
+        usuario.setEmail(request.getEmail());
         usuario.setSenha(request.getSenha());
 
-        return usuario;
+        return this.usuarioRepository.save(usuario);
     }
 
     public Page<Usuario> listarUsuarios(Pageable pageable) {

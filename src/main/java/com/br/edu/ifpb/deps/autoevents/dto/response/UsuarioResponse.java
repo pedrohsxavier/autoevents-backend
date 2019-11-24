@@ -4,13 +4,13 @@ import lombok.Data;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import org.springframework.data.domain.Page;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class UsuarioResponse {
     private Long id;
     private String nome;
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private String email;
     private String senha;
 

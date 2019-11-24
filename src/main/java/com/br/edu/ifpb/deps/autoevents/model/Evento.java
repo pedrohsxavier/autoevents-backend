@@ -3,7 +3,6 @@ package com.br.edu.ifpb.deps.autoevents.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -26,7 +25,7 @@ public class Evento {
     private LocalDate dataEvento;
 
     @Column(nullable = false)
-    private BigDecimal ingressoValor;
+    private double ingressoValor;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_evento_usuario_id"))

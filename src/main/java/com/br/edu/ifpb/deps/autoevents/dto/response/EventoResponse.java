@@ -4,7 +4,6 @@ import lombok.Data;
 import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import org.springframework.data.domain.Page;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -16,7 +15,7 @@ public class EventoResponse {
     private Long usuarioId;
     //private Long montadoraId;
     private LocalDate dataEvento;
-    private BigDecimal ingressoValor;
+    private double ingressoValor;
 
     public static EventoResponse from (Evento evento) {
         EventoResponse eventoResponse = new EventoResponse();

@@ -2,7 +2,6 @@ package com.br.edu.ifpb.deps.autoevents.dto.request;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -13,5 +12,5 @@ public class EventoRequest {
     private Long usuarioId;
     //private Long montadoraId;
     private LocalDate dataEvento;
-    private BigDecimal ingressoValor;
+    private double ingressoValor;
 }

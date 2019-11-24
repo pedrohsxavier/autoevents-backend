@@ -5,7 +5,7 @@ import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class EventoResponse {
@@ -15,7 +15,7 @@ public class EventoResponse {
     private String pais;
     private Long usuarioId;
     //private Long montadoraId;
-    private LocalDateTime dataEvento;
+    private LocalDate dataEvento;
     private BigDecimal ingressoValor;
 
     public static EventoResponse from (Evento evento) {

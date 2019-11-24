@@ -32,7 +32,7 @@ public class Evento {
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_evento_usuario_id"))
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "montadora_id", foreignKey = @ForeignKey(name = "fk_montadora_usuario_id"))
-    private Montadora montadora;
+//    @ManyToOne
+//    @JoinColumn(name = "montadora_id", foreignKey = @ForeignKey(name = "fk_montadora_usuario_id"))
+//    private Montadora montadora;
 }

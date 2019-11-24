@@ -25,15 +25,16 @@ public class EventoService {
         Evento evento = new Evento();
 
         Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
         evento.setNome(request.getNome());
         evento.setCidade(request.getCidade());
         evento.setPais(request.getPais());
         evento.setDataEvento(request.getDataEvento());
         evento.setIngressoValor(request.getIngressoValor());
+        evento.setUsuario(usuario);
 
-        return evento;
+        return this.eventoRepository.save(evento);
     }
 
     public Evento atualizarEvento(Long id, EventoRequest request) {
@@ -48,6 +49,7 @@ public class EventoService {
         evento.setNome(request.getNome());
         evento.setDataEvento(request.getDataEvento());
         evento.setIngressoValor(request.getIngressoValor());
+        evento.setUsuario(usuario);
 
         return this.eventoRepository.save(evento);
     }

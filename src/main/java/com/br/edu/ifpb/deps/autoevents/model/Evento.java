@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -23,7 +23,7 @@ public class Evento {
     private String pais;
 
     @Column(nullable = false)
-    private LocalDateTime dataEvento;
+    private LocalDate dataEvento;
 
     @Column(nullable = false)
     private BigDecimal ingressoValor;

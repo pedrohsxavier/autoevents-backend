@@ -4,7 +4,9 @@ import dto.request.EventoRequest;
 import model.Evento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import repository.EventoRepository;
 
 @Service
@@ -29,7 +31,7 @@ public class EventoService {
 
     public Evento atualizarEvento(Long id, EventoRequest request) {
         Evento evento = this.eventoRepository.findById(id).orElseThrow(
-                () -> new HandlerException("Evento inexistente"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
 
         evento.setCidade(request.getCidade());
         evento.setPais(request.getPais());
@@ -46,14 +48,14 @@ public class EventoService {
 
     public Evento buscarEvento(Long id) {
         Evento evento = this.eventoRepository.findById(id).orElseThrow(
-                () -> new HandlerException("Evento inexistente"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
 
         return evento;
     }
 
     public void removerEvento(Long id) {
         Evento evento = this.eventoRepository.findById(id).orElseThrow(
-                () -> new HandlerException("Evento inexistente"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
         this.eventoRepository.delete(evento);
     }
 }

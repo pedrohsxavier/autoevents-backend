@@ -4,7 +4,9 @@ import dto.request.UsuarioRequest;
 import model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import repository.UsuarioRepository;
 
 import java.util.Optional;
@@ -19,7 +21,7 @@ public class UsuarioService {
 
     public Usuario criarUsuario(UsuarioRequest request) {
         Usuario usuario = this.usuarioRepository.findByEmail(request.getEmail()).orElseThrow(
-                () -> new HandlerException("E-mail já cadastrado na base de dados"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "E-mail já cadastrado na base de dados"));
 
         usuario.setDataNascimento(request.getDataNascimento());
         usuario.setEmail(request.getEmail());
@@ -31,7 +33,7 @@ public class UsuarioService {
 
     public Usuario atualizarUsuario(Long id, UsuarioRequest request) {
         Usuario usuario = this.usuarioRepository.findById(id).orElseThrow(
-                () -> new HandlerException("Usuário inexistente"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
         Optional<Usuario> busca = this.usuarioRepository.findByEmail(request.getEmail());
 
@@ -52,13 +54,13 @@ public class UsuarioService {
 
     public Usuario buscarUsuario(Long id) {
         Usuario usuario = this.usuarioRepository.findById(id).orElseThrow(
-                () -> new HandlerException("Usuário inexistente"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND ,"Usuário inexistente"));
         return usuario;
     }
 
     public void removerUsuario(Long id) {
         Usuario usuario = this.usuarioRepository.findById(id).orElseThrow(
-                () -> new HandlerException("Usuário inexistente"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
         this.usuarioRepository.delete(usuario);
     }
 }

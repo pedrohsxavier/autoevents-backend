@@ -28,6 +28,7 @@ public class EventoService {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
         evento.setNome(request.getNome());
+        evento.setDescricao(request.getDescricao());
         evento.setCidade(request.getCidade());
         evento.setPais(request.getPais());
         evento.setDataEvento(request.getDataEvento());
@@ -44,9 +45,10 @@ public class EventoService {
         Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
+        evento.setNome(request.getNome());
+        evento.setDescricao(request.getDescricao());
         evento.setCidade(request.getCidade());
         evento.setPais(request.getPais());
-        evento.setNome(request.getNome());
         evento.setDataEvento(request.getDataEvento());
         evento.setIngressoValor(request.getIngressoValor());
         evento.setUsuario(usuario);

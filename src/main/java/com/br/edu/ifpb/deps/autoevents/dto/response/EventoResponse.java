@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public class EventoResponse {
     private Long id;
     private String nome;
+    private String descricao;
     private String cidade;
     private String pais;
     private Long usuarioId;
@@ -21,6 +22,7 @@ public class EventoResponse {
         EventoResponse eventoResponse = new EventoResponse();
 
         eventoResponse.setNome(evento.getNome());
+        eventoResponse.setDescricao(evento.getDescricao());
         eventoResponse.setCidade(evento.getCidade());
         eventoResponse.setPais(evento.getPais());
         eventoResponse.setDataEvento(evento.getDataEvento());
@@ -37,6 +39,7 @@ public class EventoResponse {
             EventoResponse eventoResponse = new EventoResponse();
 
             eventoResponse.setNome(evento.getNome());
+            eventoResponse.setDescricao(evento.getDescricao());
             eventoResponse.setCidade(evento.getCidade());
             eventoResponse.setPais(evento.getPais());
             eventoResponse.setDataEvento(evento.getDataEvento());

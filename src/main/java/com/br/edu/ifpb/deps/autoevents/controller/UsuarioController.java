@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 public class UsuarioController {
     private UsuarioService service;
 
@@ -30,6 +31,12 @@ public class UsuarioController {
     public ResponseEntity<Page<UsuarioResponse>> listarUsuarios(Pageable pageable) {
         Page<Usuario> usuarios = this.service.listarUsuarios(pageable);
         return ResponseEntity.ok(UsuarioResponse.from(usuarios));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponse> buscarUsuario(@Valid @PathVariable("id") Long id){
+        Usuario usuario = this.service.buscarUsuario(id);
+        return ResponseEntity.ok(UsuarioResponse.from(usuario));
     }
 
     @PutMapping("/{id}")

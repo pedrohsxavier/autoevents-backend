@@ -17,7 +17,7 @@ public class EventoService {
         this.eventoRepository = eventoRepository;
     }
 
-    public Evento criarEvento(EventoRequest request) {
+    public Evento cadastrarEvento(EventoRequest request) {
         Evento evento = new Evento();
 
         evento.setNome(request.getNome());

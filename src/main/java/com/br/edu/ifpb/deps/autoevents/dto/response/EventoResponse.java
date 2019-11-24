@@ -14,7 +14,7 @@ public class EventoResponse {
     private String cidade;
     private String pais;
     private Long usuarioId;
-    private Long montadoraId;
+    //private Long montadoraId;
     private LocalDateTime dataEvento;
     private BigDecimal ingressoValor;
 
@@ -27,7 +27,7 @@ public class EventoResponse {
         eventoResponse.setDataEvento(evento.getDataEvento());
         eventoResponse.setId(evento.getId());
         eventoResponse.setIngressoValor(evento.getIngressoValor());
-        eventoResponse.setMontadoraId(evento.getMontadora().getId());
+        //eventoResponse.setMontadoraId(evento.getMontadora().getId());
         eventoResponse.setUsuarioId(evento.getUsuario().getId());
 
         return eventoResponse;
@@ -43,7 +43,7 @@ public class EventoResponse {
             eventoResponse.setDataEvento(evento.getDataEvento());
             eventoResponse.setId(evento.getId());
             eventoResponse.setIngressoValor(evento.getIngressoValor());
-            eventoResponse.setMontadoraId(evento.getMontadora().getId());
+            //eventoResponse.setMontadoraId(evento.getMontadora().getId());
             eventoResponse.setUsuarioId(evento.getUsuario().getId());
 
             return eventoResponse;

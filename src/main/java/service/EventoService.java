@@ -20,9 +20,9 @@ public class EventoService {
     public Evento criarEvento(EventoRequest request) {
         Evento evento = new Evento();
 
+        evento.setNome(request.getNome());
         evento.setCidade(request.getCidade());
         evento.setPais(request.getPais());
-        evento.setNome(request.getNome());
         evento.setDataEvento(request.getDataEvento());
         evento.setIngressoValor(request.getIngressoValor());
 

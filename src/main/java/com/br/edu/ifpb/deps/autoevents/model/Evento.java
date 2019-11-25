@@ -3,6 +3,7 @@ package com.br.edu.ifpb.deps.autoevents.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.time.LocalDate;
 
 @Entity
@@ -22,6 +23,7 @@ public class Evento {
     private String pais;
 
     @Column(nullable = false)
+    @Future(message="Data inválida")
     private LocalDate dataEvento;
 
     @Column(nullable = false)

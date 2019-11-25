@@ -3,6 +3,7 @@ package com.br.edu.ifpb.deps.autoevents.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 @Entity
@@ -16,9 +17,10 @@ public class Usuario {
     private String nome;
 
     @Column(nullable = false)
+    @Past(message="Data inválida")
     private LocalDate dataNascimento;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)

@@ -160,7 +160,7 @@ public class EventoControllerTest {
     private Usuario usuarioTeste(){
         UsuarioRequest usuarioRequest = new UsuarioRequest();
 
-        usuarioRequest.setDataNascimento(LocalDate.now());
+        usuarioRequest.setDataNascimento(LocalDate.of(1982, Month.MARCH, 19));
         usuarioRequest.setEmail(faker.internet().emailAddress());
         usuarioRequest.setNome(faker.name().firstName());
         usuarioRequest.setSenha(faker.funnyName().name());

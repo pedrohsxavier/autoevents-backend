@@ -3,7 +3,6 @@ package com.br.edu.ifpb.deps.autoevents.service;
 import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import com.github.javafaker.Faker;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +13,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.*;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -29,14 +30,13 @@ public class UsuarioServiceTest {
     private UsuarioRequest request;
     private Usuario criar;
 
+    private Validator validator;
+
     @Before
     public void config(){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        factory.getValidator();
         criar = this.service.criarUsuario(requestTeste());
-    }
-
-    @After
-    public void end(){
-        this.service.removerUsuario(criar.getId());
     }
 
     @Test
@@ -50,16 +50,14 @@ public class UsuarioServiceTest {
         Assert.assertTrue(request.getNome().length() > 2);
     }
 
-    @Test
+    @Test(expected = ResponseStatusException.class)
     public void dataIncorretaImpossivelCadastro(){
-        try{
-            request = requestTeste();
-            request.setDataNascimento(LocalDate.of(2022, Month.FEBRUARY, 10));
-            this.service.criarUsuario(request);
-        }catch (ResponseStatusException e){
-            String erro = "400 BAD_REQUEST \"Data inválida para ser cadastrada.\"";
-            Assert.assertEquals(e.getMessage(), erro);
-        }
+        request = requestTeste();
+        request.setDataNascimento(LocalDate.of(2022, Month.FEBRUARY, 10));
+        this.service.criarUsuario(request);
+
+        Set<ConstraintViolation<UsuarioRequest>> violations = validator.validate(request);
+        Assert.assertFalse(violations.isEmpty());
     }
 
     @Test(expected = ResponseStatusException.class)
@@ -67,6 +65,9 @@ public class UsuarioServiceTest {
         request = requestTeste();
         this.service.criarUsuario(request);
         this.service.criarUsuario(request);
+
+        Set<ConstraintViolation<UsuarioRequest>> violations = validator.validate(request);
+        Assert.assertFalse(violations.isEmpty());
     }
 
     @Test
@@ -130,7 +131,7 @@ public class UsuarioServiceTest {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
         faker = new Faker();
 
-        usuarioRequest.setDataNascimento(LocalDate.now());
+        usuarioRequest.setDataNascimento(LocalDate.of(1922, Month.AUGUST, 21));
         usuarioRequest.setEmail(faker.internet().emailAddress());
         usuarioRequest.setSenha(faker.funnyName().name());
         usuarioRequest.setNome(faker.name().firstName());

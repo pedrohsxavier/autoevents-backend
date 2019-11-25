@@ -42,6 +42,9 @@ public class UsuarioControllerTest {
     @Test
     public void cadastrarEmailDuplicadoErro(){
         UsuarioRequest request = requestTeste();
+
+        System.out.println(request.getEmail());
+
         this.service.criarUsuario(request);
             RestAssured.given()
                     .contentType(ContentType.JSON)
@@ -52,6 +55,24 @@ public class UsuarioControllerTest {
                     .log()
                     .ifValidationFails()
                     .statusCode(HttpStatus.SC_BAD_REQUEST);
+
+    }
+
+    @Test
+    public void cadastrarErroDataFutura(){
+        UsuarioRequest request = requestTeste();
+        this.service.criarUsuario(request);
+        request.setDataNascimento(LocalDate.of(2021, Month.AUGUST, 11));
+        RestAssured.given()
+                .contentType(ContentType.JSON)
+                .body(request)
+                .when()
+                .post(PATH)
+                .then()
+                .log()
+                .ifValidationFails()
+                .statusCode(HttpStatus.SC_BAD_REQUEST);
+
     }
 
     @Test
@@ -156,7 +177,7 @@ public class UsuarioControllerTest {
     private UsuarioRequest requestTeste(){
         UsuarioRequest request = new UsuarioRequest();
 
-        request.setDataNascimento(LocalDate.now());
+        request.setDataNascimento(LocalDate.of(1968, Month.MAY, 18));
         request.setNome(faker.name().firstName());
         request.setSenha(faker.funnyName().name());
         request.setEmail(faker.internet().emailAddress());

@@ -2,7 +2,6 @@ package com.br.edu.ifpb.deps.autoevents.service;
 
 import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
-import com.br.edu.ifpb.deps.autoevents.repository.UsuarioRepository;
 import com.github.javafaker.Faker;
 import org.junit.After;
 import org.junit.Assert;

@@ -158,7 +158,7 @@ public class EventoServiceTest {
         Faker faker = new Faker();
 
         UsuarioRequest usuario = new UsuarioRequest();
-        usuario.setDataNascimento(LocalDate.now());
+        usuario.setDataNascimento(LocalDate.of(1982, Month.JUNE, 1));
         usuario.setEmail(faker.internet().emailAddress());
         usuario.setNome(faker.name().firstName());
         usuario.setSenha(faker.funnyName().name());

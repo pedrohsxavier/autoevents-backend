@@ -57,37 +57,37 @@ public class EventoServiceTest {
         Assert.assertTrue(request.getNome().length() < 50);
     }
 
-//    @Test
-//    public void cadastrarErradoComLugarDataIguais(){
-//        try{
-//            request = requestTeste();
-//            Evento eventoSalvo = this.service.cadastrarEvento(request);
-//            request.setNome(faker.funnyName().name());
-//            Evento eventoErrado = this.service.cadastrarEvento(request);
-//        }
-//        catch (ResponseStatusException e){
-//            String erroCidadeData = "400 BAD_REQUEST \"Impossível haver dois eventos no mesmo dia e local.\"";
-//            Assert.assertEquals(e.getMessage(), erroCidadeData);
-//        }
-//    }
-//
-//    @Test
-//    public void cadastrarErradoComNomesIguais(){
-//        try{
-//            request = requestTeste();
-//            System.out.println(request.getNome());
-//            Evento eventoSalvo = this.service.cadastrarEvento(request);
-//
-//            request.setCidade(faker.address().cityName());
-//            System.out.println(request.getNome());
-//            Evento eventoErrado = this.service.cadastrarEvento(request);
-//            System.out.println();
-//        }
-//        catch (ResponseStatusException e){
-//            String erroNome = "400 BAD_REQUEST \"Impossível haver dois eventos com o mesmo nome\"";
-//            Assert.assertEquals(e.getMessage(), erroNome);
-//        }
-//    }
+    @Test
+    public void cadastrarErradoComLugarDataIguais(){
+        try{
+            request = requestTeste();
+            Evento eventoSalvo = this.service.cadastrarEvento(request);
+            request.setNome(faker.funnyName().name());
+            Evento eventoErrado = this.service.cadastrarEvento(request);
+        }
+        catch (ResponseStatusException e){
+            String erroCidadeData = "400 BAD_REQUEST \"Impossível haver dois eventos no mesmo dia e local.\"";
+            Assert.assertEquals(e.getMessage(), erroCidadeData);
+        }
+    }
+
+    @Test
+    public void cadastrarErradoComNomesIguais(){
+        try{
+            request = requestTeste();
+            System.out.println(request.getNome());
+            Evento eventoSalvo = this.service.cadastrarEvento(request);
+
+            request.setCidade(faker.address().cityName());
+            System.out.println(request.getNome());
+            Evento eventoErrado = this.service.cadastrarEvento(request);
+            System.out.println();
+        }
+        catch (ResponseStatusException e){
+            String erroNome = "400 BAD_REQUEST \"Impossível haver dois eventos com o mesmo nome\"";
+            Assert.assertEquals(e.getMessage(), erroNome);
+        }
+    }
 
     @Test
     public void listarEvento(){
@@ -143,7 +143,7 @@ public class EventoServiceTest {
         Random random = new Random();
 
         eventoRequest.setCidade(faker.address().cityName());
-        eventoRequest.setDataEvento(LocalDate.of(2021, random.nextInt((12) +1), random.nextInt(27) + 1));
+        eventoRequest.setDataEvento(LocalDate.of(2021, Month.APRIL, random.nextInt(27) + 1));
         eventoRequest.setDescricao(RandomStringUtils.random(60, true, false));
         eventoRequest.setIngressoValor(200);
         eventoRequest.setNome(faker.app().name());

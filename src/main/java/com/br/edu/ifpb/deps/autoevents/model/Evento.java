@@ -1,6 +1,11 @@
 package com.br.edu.ifpb.deps.autoevents.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -22,8 +27,11 @@ public class Evento {
     @Column(nullable = false)
     private String pais;
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @Column(nullable = false)
     @Future(message="Data inválida")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataEvento;
 
     @Column(nullable = false)

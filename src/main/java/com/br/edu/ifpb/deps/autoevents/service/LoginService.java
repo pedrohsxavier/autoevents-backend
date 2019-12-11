@@ -1,6 +1,5 @@
 package com.br.edu.ifpb.deps.autoevents.service;
 
-import com.br.edu.ifpb.deps.autoevents.exceptions.ResourceExceptionHandler;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import com.br.edu.ifpb.deps.autoevents.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ public class LoginService {
         Usuario usuario = this.usuarioRepository.findByEmail(email).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe um usuário com esse email"));
 
-        if((email == usuario.getEmail()) && (senha == usuario.getSenha())){
+        if((email.equalsIgnoreCase(usuario.getEmail())) && (senha.equals(usuario.getSenha()))){
             return usuario;
         }else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Credenciais inválidas");

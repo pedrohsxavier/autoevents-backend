@@ -1,11 +1,9 @@
 package com.br.edu.ifpb.deps.autoevents.dto.request;
 
-import lombok.Data;
-
 public class MontadoraRequest {
     private String nome;
     private String pais;
-    private Long carroId;
+
 
     public String getNome() {
         return nome;
@@ -23,11 +21,4 @@ public class MontadoraRequest {
         this.pais = pais;
     }
 
-    public Long getCarroId() {
-        return carroId;
-    }
-
-    public void setCarroId(Long carroId) {
-        this.carroId = carroId;
-    }
 }

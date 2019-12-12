@@ -36,8 +36,8 @@ public class MontadoraResponse {
         MontadoraResponse montadoraResponse = new MontadoraResponse();
 
         montadoraResponse.setId(montadora.getId());
-        montadora.setNome(montadora.getNome());
-        montadora.setPais(montadora.getPais());
+        montadoraResponse.setNome(montadora.getNome());
+        montadoraResponse.setPais(montadora.getPais());
 
         return montadoraResponse;
     }
@@ -47,8 +47,8 @@ public class MontadoraResponse {
             MontadoraResponse montadoraResponse = new MontadoraResponse();
 
             montadoraResponse.setId(montadora.getId());
-            montadora.setNome(montadora.getNome());
-            montadora.setPais(montadora.getPais());
+            montadoraResponse.setNome(montadora.getNome());
+            montadoraResponse.setPais(montadora.getPais());
 
             return montadoraResponse;
         });

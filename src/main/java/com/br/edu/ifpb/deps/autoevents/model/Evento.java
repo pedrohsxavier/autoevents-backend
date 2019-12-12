@@ -12,7 +12,6 @@ import javax.validation.constraints.Future;
 import java.time.LocalDate;
 
 @Entity
-@Data
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +43,67 @@ public class Evento {
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_evento_usuario_id"))
     private Usuario usuario;
 
-//    @ManyToOne
-//    @JoinColumn(name = "montadora_id", foreignKey = @ForeignKey(name = "fk_montadora_usuario_id"))
-//    private Montadora montadora;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public LocalDate getDataEvento() {
+        return dataEvento;
+    }
+
+    public void setDataEvento(LocalDate dataEvento) {
+        this.dataEvento = dataEvento;
+    }
+
+    public double getIngressoValor() {
+        return ingressoValor;
+    }
+
+    public void setIngressoValor(double ingressoValor) {
+        this.ingressoValor = ingressoValor;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

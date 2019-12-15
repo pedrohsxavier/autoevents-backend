@@ -148,7 +148,7 @@ public class EventoServiceTest {
         eventoRequest.setIngressoValor(200);
         eventoRequest.setNome(faker.app().name());
         eventoRequest.setPais(faker.address().country());
-        eventoRequest.setUsuarioId(user.getId());
+ //       eventoRequest.setUsuarioId(user.getId());
 
         return eventoRequest;
     }

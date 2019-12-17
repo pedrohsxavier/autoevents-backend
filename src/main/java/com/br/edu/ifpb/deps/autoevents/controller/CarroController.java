@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/carros")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class CarroController {
     private CarroService carroService;
 

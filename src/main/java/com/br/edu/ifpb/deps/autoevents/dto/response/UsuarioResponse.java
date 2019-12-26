@@ -1,6 +1,5 @@
 package com.br.edu.ifpb.deps.autoevents.dto.response;
 
-import lombok.Data;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import org.springframework.data.domain.Page;
 

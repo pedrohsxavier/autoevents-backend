@@ -1,6 +1,6 @@
 package com.br.edu.ifpb.deps.autoevents.model;
 
-import lombok.Data;
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;

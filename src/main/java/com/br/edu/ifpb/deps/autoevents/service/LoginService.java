@@ -9,16 +9,19 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class LoginService {
     private UsuarioRepository usuarioRepository;
+    private TokenService tokenService;
 
-    public LoginService(UsuarioRepository usuarioRepository) {
+    public LoginService(UsuarioRepository usuarioRepository, TokenService tokenService) {
         this.usuarioRepository = usuarioRepository;
+        this.tokenService = tokenService;
     }
 
     public Usuario login(String email, String senha){
         Usuario usuario = this.usuarioRepository.findByEmail(email).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe um usuário com esse email"));
 
-        if((email.equalsIgnoreCase(usuario.getEmail())) && (senha.equals(usuario.getSenha()))){
+        if(senha.equals(usuario.getSenha())){
+            usuario.setToken(tokenService.generateToken(usuario));
             return usuario;
         }else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Credenciais inválidas");

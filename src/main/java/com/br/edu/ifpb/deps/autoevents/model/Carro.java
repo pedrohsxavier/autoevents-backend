@@ -1,9 +1,10 @@
 package com.br.edu.ifpb.deps.autoevents.model;
 
-import lombok.Data;
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Carro {
@@ -23,6 +24,9 @@ public class Carro {
     @OneToOne
     @JoinColumn(name = "montadora_id", nullable = false, foreignKey = @ForeignKey(name = "fk_montadora_carro_id"))
     private Montadora montadora;
+
+    @ManyToMany(mappedBy = "carros")
+    private Set<Evento> eventos;
 
     public Long getId() {
         return id;

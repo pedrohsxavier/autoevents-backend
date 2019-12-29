@@ -1,6 +1,5 @@
 package com.br.edu.ifpb.deps.autoevents.dto.response;
 
-import lombok.Data;
 import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import org.springframework.data.domain.Page;
 
@@ -91,7 +90,7 @@ public class EventoResponse {
         eventoResponse.setId(evento.getId());
         eventoResponse.setIngressoValor(evento.getIngressoValor());
         //eventoResponse.setMontadoraId(evento.getMontadora().getId());
-        eventoResponse.setUsuarioId(evento.getUsuario().getId());
+        //eventoResponse.setUsuarioId(evento.getUsuario().getId());
 
         return eventoResponse;
     }
@@ -108,7 +107,7 @@ public class EventoResponse {
             eventoResponse.setId(evento.getId());
             eventoResponse.setIngressoValor(evento.getIngressoValor());
             //eventoResponse.setMontadoraId(evento.getMontadora().getId());
-            eventoResponse.setUsuarioId(evento.getUsuario().getId());
+            //eventoResponse.setUsuarioId(evento.getUsuario().getId());
 
             return eventoResponse;
         });

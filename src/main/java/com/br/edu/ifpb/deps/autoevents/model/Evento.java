@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.Data;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Evento {
@@ -42,6 +44,19 @@ public class Evento {
     @ManyToOne
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_evento_usuario_id"))
     private Usuario usuario;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "evento_carros", joinColumns = @JoinColumn(name = "evento_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "carro_id", referencedColumnName = "id"))
+    private Set<Carro> carros = new HashSet<>();
+
+    public Set<Carro> getCarros() {
+        return carros;
+    }
+
+    public void setCarros(Set<Carro> carros) {
+        this.carros = carros;
+    }
 
     public Long getId() {
         return id;

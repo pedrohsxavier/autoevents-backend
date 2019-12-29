@@ -1,6 +1,7 @@
 package com.br.edu.ifpb.deps.autoevents.controller;
 
 import com.br.edu.ifpb.deps.autoevents.dto.request.LoginRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.response.LoginResponse;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import com.br.edu.ifpb.deps.autoevents.service.LoginService;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> realizarLogin(@Valid @RequestBody LoginRequest request){
+    public ResponseEntity<LoginResponse> realizarLogin(@Valid @RequestBody LoginRequest request){
         Usuario usuario = this.service.login(request.getLogin(), request.getSenha());
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(LoginResponse.from(usuario));
     }
 }

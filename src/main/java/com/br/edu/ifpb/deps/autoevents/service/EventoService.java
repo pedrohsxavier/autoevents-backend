@@ -24,8 +24,8 @@ public class EventoService {
     public Evento cadastrarEvento(EventoRequest request) {
         Evento evento = new Evento();
 
-        Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
+//        Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
+//                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
         evento.setNome(request.getNome());
         evento.setDescricao(request.getDescricao());
@@ -33,7 +33,7 @@ public class EventoService {
         evento.setPais(request.getPais());
         evento.setDataEvento(request.getDataEvento());
         evento.setIngressoValor(request.getIngressoValor());
-        evento.setUsuario(usuario);
+   //     evento.setUsuario(usuario);
 
         return this.eventoRepository.save(evento);
     }
@@ -42,8 +42,8 @@ public class EventoService {
         Evento evento = this.eventoRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
 
-        Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
+//        Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
+//                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
         evento.setNome(request.getNome());
         evento.setDescricao(request.getDescricao());
@@ -51,7 +51,7 @@ public class EventoService {
         evento.setPais(request.getPais());
         evento.setDataEvento(request.getDataEvento());
         evento.setIngressoValor(request.getIngressoValor());
-        evento.setUsuario(usuario);
+//        evento.setUsuario(usuario);
 
         return this.eventoRepository.save(evento);
     }

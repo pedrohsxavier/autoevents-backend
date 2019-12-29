@@ -1,6 +1,5 @@
 package com.br.edu.ifpb.deps.autoevents.dto.request;
 
-import lombok.Data;
 
 public class LoginRequest {
     private String login;

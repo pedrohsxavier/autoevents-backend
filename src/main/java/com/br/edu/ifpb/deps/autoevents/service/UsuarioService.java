@@ -14,9 +14,11 @@ import java.time.LocalDate;
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final TokenService tokenService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, TokenService tokenService) {
         this.usuarioRepository = usuarioRepository;
+        this.tokenService = tokenService;
     }
 
     public Usuario criarUsuario(UsuarioRequest request) {
@@ -31,6 +33,7 @@ public class UsuarioService {
         usuario.setEmail(request.getEmail());
         usuario.setNome(request.getNome());
         usuario.setSenha(request.getSenha());
+        usuario.setToken(tokenService.generateToken(usuario));
 
         return this.usuarioRepository.save(usuario);
     }

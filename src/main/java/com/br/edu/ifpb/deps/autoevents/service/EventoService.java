@@ -1,10 +1,13 @@
 package com.br.edu.ifpb.deps.autoevents.service;
 
+import com.br.edu.ifpb.deps.autoevents.dto.request.CarroEventoRequest;
 import com.br.edu.ifpb.deps.autoevents.dto.request.EventoRequest;
 import com.br.edu.ifpb.deps.autoevents.dto.request.InscricaoRequest;
 import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
+import com.br.edu.ifpb.deps.autoevents.model.Carro;
 import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
+import com.br.edu.ifpb.deps.autoevents.repository.CarroRepository;
 import com.br.edu.ifpb.deps.autoevents.repository.UsuarioRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +20,12 @@ import com.br.edu.ifpb.deps.autoevents.repository.EventoRepository;
 public class EventoService {
     private EventoRepository eventoRepository;
     private UsuarioRepository usuarioRepository;
+    private CarroRepository carroRepository;
 
-    public EventoService(EventoRepository eventoRepository, UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    public EventoService(EventoRepository eventoRepository, UsuarioRepository usuarioRepository, CarroRepository carroRepository) {
         this.eventoRepository = eventoRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.carroRepository = carroRepository;
     }
 
     public Evento cadastrarEvento(EventoRequest request) {
@@ -81,10 +86,23 @@ public class EventoService {
         Usuario usuario = this.usuarioRepository.findByEmail(request.getEmail()).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
 
-        evento.getUsuario().add(usuario);
+        evento.getUsuarios().add(usuario);
         usuario.getEventos().add(evento);
 
         this.eventoRepository.save(evento);
         return usuario;
+    }
+
+    public Carro cadastrarCarroEvento(Long id, CarroEventoRequest request) {
+        Evento evento = this.eventoRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
+        Carro carro = this.carroRepository.findByNome(request.getNome()).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe carro com esse nome"));
+
+        evento.getCarros().add(carro);
+        carro.getEventos().add(evento);
+
+        this.eventoRepository.save(evento);
+        return carro;
     }
 }

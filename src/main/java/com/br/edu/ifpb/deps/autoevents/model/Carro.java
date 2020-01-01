@@ -1,9 +1,8 @@
 package com.br.edu.ifpb.deps.autoevents.model;
 
-
-
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,12 +20,23 @@ public class Carro {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "montadora_id", nullable = false, foreignKey = @ForeignKey(name = "fk_montadora_carro_id"))
     private Montadora montadora;
 
-    @ManyToMany(mappedBy = "carros")
-    private Set<Evento> eventos;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    }, mappedBy = "carros")
+    private Set<Evento> eventos = new HashSet<>();
+
+    public Set<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(Set<Evento> eventos) {
+        this.eventos = eventos;
+    }
 
     public Long getId() {
         return id;

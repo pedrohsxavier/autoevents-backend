@@ -41,7 +41,7 @@ public class Usuario {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
-    }, mappedBy = "usuario")
+    }, mappedBy = "usuarios")
     private Set<Evento> eventos = new HashSet<>();
 
     public Set<Evento> getEventos() {

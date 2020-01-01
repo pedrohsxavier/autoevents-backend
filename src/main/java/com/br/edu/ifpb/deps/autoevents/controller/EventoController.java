@@ -1,10 +1,13 @@
 package com.br.edu.ifpb.deps.autoevents.controller;
 
+import com.br.edu.ifpb.deps.autoevents.dto.request.CarroEventoRequest;
 import com.br.edu.ifpb.deps.autoevents.dto.request.EventoRequest;
 import com.br.edu.ifpb.deps.autoevents.dto.request.InscricaoRequest;
 import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.response.CarroEventoResponse;
 import com.br.edu.ifpb.deps.autoevents.dto.response.EventoResponse;
 import com.br.edu.ifpb.deps.autoevents.dto.response.InscricaoResponse;
+import com.br.edu.ifpb.deps.autoevents.model.Carro;
 import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import com.br.edu.ifpb.deps.autoevents.service.EventoService;
@@ -56,10 +59,17 @@ public class EventoController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/usuarios")
     public ResponseEntity<InscricaoResponse> inscreverUsuario(@Valid @PathVariable(value = "id") Long id,
                                                               @RequestBody InscricaoRequest request){
         Usuario usuario = this.service.inscreverUsuario(id, request);
         return ResponseEntity.ok(InscricaoResponse.from(id, usuario));
+    }
+
+    @PostMapping("/{id}/carros")
+    public ResponseEntity<CarroEventoResponse> cadastrarCarroEvento(@Valid @PathVariable(value = "id") Long id,
+                                                                    @RequestBody CarroEventoRequest request){
+        Carro carro = this.service.cadastrarCarroEvento(id, request);
+        return ResponseEntity.ok(CarroEventoResponse.from(id, carro));
     }
 }

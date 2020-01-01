@@ -1,6 +1,8 @@
 package com.br.edu.ifpb.deps.autoevents.service;
 
 import com.br.edu.ifpb.deps.autoevents.dto.request.EventoRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.request.InscricaoRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
 import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import com.br.edu.ifpb.deps.autoevents.repository.UsuarioRepository;
@@ -71,5 +73,18 @@ public class EventoService {
         Evento evento = this.eventoRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
         this.eventoRepository.delete(evento);
+    }
+
+    public Usuario inscreverUsuario(Long id, InscricaoRequest request) {
+        Evento evento = this.eventoRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
+        Usuario usuario = this.usuarioRepository.findByEmail(request.getEmail()).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
+
+        evento.getUsuario().add(usuario);
+        usuario.getEventos().add(evento);
+
+        this.eventoRepository.save(evento);
+        return usuario;
     }
 }

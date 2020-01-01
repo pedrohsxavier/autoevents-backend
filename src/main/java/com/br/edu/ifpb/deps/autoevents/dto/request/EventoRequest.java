@@ -9,19 +9,8 @@ public class EventoRequest {
     private String descricao;
     private String cidade;
     private String pais;
-    //private Long usuarioId;
-    //private Long montadoraId;
     private LocalDate dataEvento;
     private double ingressoValor;
-    private Long carroId;
-
-    public Long getCarroId() {
-        return carroId;
-    }
-
-    public void setCarroId(Long carroId) {
-        this.carroId = carroId;
-    }
 
     public String getNome() {
         return nome;

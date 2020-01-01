@@ -41,14 +41,27 @@ public class Evento {
     @Column(nullable = false)
     private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_evento_usuario_id"))
-    private Usuario usuario;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "evento_usuario",
+            joinColumns = { @JoinColumn(name = "usuario_id")},
+            inverseJoinColumns = { @JoinColumn(name = "evento_id")})
+    private Set<Usuario> usuario = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "evento_carros", joinColumns = @JoinColumn(name = "evento_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "carro_id", referencedColumnName = "id"))
     private Set<Carro> carros = new HashSet<>();
+
+    public Set<Usuario> getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Set<Usuario> usuario) {
+        this.usuario = usuario;
+    }
 
     public Set<Carro> getCarros() {
         return carros;
@@ -114,11 +127,6 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+
 }

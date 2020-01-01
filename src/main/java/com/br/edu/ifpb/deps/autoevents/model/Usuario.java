@@ -10,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Past;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Usuario {
@@ -35,6 +37,20 @@ public class Usuario {
 
     @Transient
     private String token;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    }, mappedBy = "usuario")
+    private Set<Evento> eventos = new HashSet<>();
+
+    public Set<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(Set<Evento> eventos) {
+        this.eventos = eventos;
+    }
 
     public String getToken() {
         return token;

@@ -1,8 +1,12 @@
 package com.br.edu.ifpb.deps.autoevents.controller;
 
 import com.br.edu.ifpb.deps.autoevents.dto.request.EventoRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.request.InscricaoRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
 import com.br.edu.ifpb.deps.autoevents.dto.response.EventoResponse;
+import com.br.edu.ifpb.deps.autoevents.dto.response.InscricaoResponse;
 import com.br.edu.ifpb.deps.autoevents.model.Evento;
+import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import com.br.edu.ifpb.deps.autoevents.service.EventoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,5 +54,12 @@ public class EventoController {
     public ResponseEntity<Void> removerEvento(@Valid @PathVariable(value = "id") Long id){
         this.service.removerEvento(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<InscricaoResponse> inscreverUsuario(@Valid @PathVariable(value = "id") Long id,
+                                                              @RequestBody InscricaoRequest request){
+        Usuario usuario = this.service.inscreverUsuario(id, request);
+        return ResponseEntity.ok(InscricaoResponse.from(id, usuario));
     }
 }

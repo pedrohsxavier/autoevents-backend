@@ -1,6 +1,7 @@
 package com.br.edu.ifpb.deps.autoevents.controller;
 
 import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
+import com.br.edu.ifpb.deps.autoevents.dto.response.LoginResponse;
 import com.br.edu.ifpb.deps.autoevents.dto.response.UsuarioResponse;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import org.springframework.data.domain.Page;
@@ -22,9 +23,9 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest request) {
+    public ResponseEntity<LoginResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest request) {
         Usuario usuario = this.service.criarUsuario(request);
-        return ResponseEntity.ok(UsuarioResponse.from(usuario));
+        return ResponseEntity.ok(LoginResponse.from(usuario, "Bearer "));
     }
 
     @GetMapping

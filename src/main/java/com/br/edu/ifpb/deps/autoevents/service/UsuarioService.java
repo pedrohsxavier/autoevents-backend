@@ -2,6 +2,7 @@ package com.br.edu.ifpb.deps.autoevents.service;
 
 import com.br.edu.ifpb.deps.autoevents.dto.request.UsuarioRequest;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
+import com.br.edu.ifpb.deps.autoevents.security.DatabaseEncryptionComponent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,14 @@ import java.time.LocalDate;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final TokenService tokenService;
+    private final DatabaseEncryptionComponent databaseEncryptionComponent;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, TokenService tokenService) {
+
+    public UsuarioService(UsuarioRepository usuarioRepository, TokenService tokenService,
+                          DatabaseEncryptionComponent databaseEncryptionComponent) {
         this.usuarioRepository = usuarioRepository;
         this.tokenService = tokenService;
+        this.databaseEncryptionComponent = databaseEncryptionComponent;
     }
 
     public Usuario criarUsuario(UsuarioRequest request) {
@@ -32,7 +37,7 @@ public class UsuarioService {
 
         usuario.setEmail(request.getEmail());
         usuario.setNome(request.getNome());
-        usuario.setSenha(request.getSenha());
+        usuario.setSenha(databaseEncryptionComponent.encryptPassword(request.getSenha()));
         usuario.setToken(tokenService.generateToken(usuario));
 
         return this.usuarioRepository.save(usuario);
@@ -50,7 +55,7 @@ public class UsuarioService {
 
         usuario.setNome(request.getNome());
         usuario.setEmail(request.getEmail());
-        usuario.setSenha(request.getSenha());
+        usuario.setSenha(databaseEncryptionComponent.encryptPassword(request.getSenha()));
 
         return this.usuarioRepository.save(usuario);
     }

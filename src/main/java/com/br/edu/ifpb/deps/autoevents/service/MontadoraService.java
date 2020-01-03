@@ -3,6 +3,7 @@ package com.br.edu.ifpb.deps.autoevents.service;
 import com.br.edu.ifpb.deps.autoevents.dto.request.MontadoraRequest;
 import com.br.edu.ifpb.deps.autoevents.model.Montadora;
 import com.br.edu.ifpb.deps.autoevents.repository.MontadoraRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ public class MontadoraService {
     public Montadora cadastrarMontadora(MontadoraRequest request){
         Montadora montadora = new Montadora();
 
-        montadora.setPais(request.getPais());
-        montadora.setNome(request.getNome());
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(request, montadora);
 
         return this.montadoraRepository.save(montadora);
     }
@@ -30,8 +31,8 @@ public class MontadoraService {
         Montadora montadora = this.montadoraRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Montadora inexistente"));
 
-        montadora.setPais(request.getPais());
-        montadora.setNome(request.getNome());
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(request, montadora);
 
         return this.montadoraRepository.save(montadora);
     }

@@ -22,7 +22,7 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<LoginResponse> realizarLogin(@Valid @RequestBody LoginRequest request,
                                                        @RequestHeader(value = "Authorization") String token){
-        Usuario usuario = this.service.login(request.getLogin(), request.getSenha(), token);
+        Usuario usuario = this.service.login(request.getEmail(), request.getSenha(), token);
         return ResponseEntity.ok(LoginResponse.from(usuario, "Bearer "));
     }
 }

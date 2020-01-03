@@ -9,6 +9,7 @@ import com.br.edu.ifpb.deps.autoevents.model.Evento;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 import com.br.edu.ifpb.deps.autoevents.repository.CarroRepository;
 import com.br.edu.ifpb.deps.autoevents.repository.UsuarioRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -31,16 +32,8 @@ public class EventoService {
     public Evento cadastrarEvento(EventoRequest request) {
         Evento evento = new Evento();
 
-//        Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
-//                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
-
-        evento.setNome(request.getNome());
-        evento.setDescricao(request.getDescricao());
-        evento.setCidade(request.getCidade());
-        evento.setPais(request.getPais());
-        evento.setDataEvento(request.getDataEvento());
-        evento.setIngressoValor(request.getIngressoValor());
-   //     evento.setUsuario(usuario);
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(request,evento);
 
         return this.eventoRepository.save(evento);
     }
@@ -49,16 +42,8 @@ public class EventoService {
         Evento evento = this.eventoRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento inexistente"));
 
-//        Usuario usuario = this.usuarioRepository.findById(request.getUsuarioId()).orElseThrow(
-//                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário inexistente"));
-
-        evento.setNome(request.getNome());
-        evento.setDescricao(request.getDescricao());
-        evento.setCidade(request.getCidade());
-        evento.setPais(request.getPais());
-        evento.setDataEvento(request.getDataEvento());
-        evento.setIngressoValor(request.getIngressoValor());
-//        evento.setUsuario(usuario);
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(request,evento);
 
         return this.eventoRepository.save(evento);
     }

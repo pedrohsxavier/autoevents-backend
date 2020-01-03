@@ -5,6 +5,7 @@ import com.br.edu.ifpb.deps.autoevents.model.Carro;
 import com.br.edu.ifpb.deps.autoevents.model.Montadora;
 import com.br.edu.ifpb.deps.autoevents.repository.CarroRepository;
 import com.br.edu.ifpb.deps.autoevents.repository.MontadoraRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -27,10 +28,8 @@ public class CarroService {
         Montadora montadora = this.montadoraRepository.findById(request.getMontadoraId()).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Montadora inexistente"));
 
-        carro.setAno(request.getAno());
-        carro.setMontadora(montadora);
-        carro.setNome(request.getNome());
-        carro.setValor(request.getValor());
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(request, carro);
 
         return this.carroRepository.save(carro);
     }
@@ -41,10 +40,8 @@ public class CarroService {
         Montadora montadora = this.montadoraRepository.findById(request.getMontadoraId()).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Montadora inexistente"));
 
-        carro.setAno(request.getAno());
-        carro.setMontadora(montadora);
-        carro.setNome(request.getNome());
-        carro.setValor(request.getValor());
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(request, carro);
 
         return this.carroRepository.save(carro);
     }

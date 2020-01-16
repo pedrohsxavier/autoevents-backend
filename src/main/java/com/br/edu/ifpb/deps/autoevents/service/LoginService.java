@@ -1,5 +1,6 @@
 package com.br.edu.ifpb.deps.autoevents.service;
 
+import com.br.edu.ifpb.deps.autoevents.exceptions.DataIntegrityException;
 import com.br.edu.ifpb.deps.autoevents.exceptions.ExpiredTokenException;
 import com.br.edu.ifpb.deps.autoevents.exceptions.InvalidTokenException;
 import com.br.edu.ifpb.deps.autoevents.model.Usuario;
@@ -25,16 +26,18 @@ public class LoginService {
         this.databaseEncryptionComponent = databaseEncryptionComponent;
     }
 
-    public Usuario login(String email, String senha, String token){
+    public Usuario login(String email, String senha){
         Usuario usuario = this.usuarioRepository.findByEmail(email).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe um usuário com esse email"));
 
+        usuario.setToken(tokenService.generateToken(usuario));
+
         if(senha.equals(databaseEncryptionComponent.decryptPassword(usuario.getSenha()))
-                && !token.isEmpty() && validate(token)){
+                && !usuario.getToken().isEmpty() && validate(usuario.getToken())){
             usuario.setToken(tokenService.generateToken(usuario));
             return usuario;
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Credenciais inválidas");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Credenciais inválidas");
         }
     }
 

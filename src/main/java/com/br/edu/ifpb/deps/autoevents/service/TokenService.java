@@ -16,7 +16,7 @@ public class TokenService {
     public String generateToken(Usuario usuario){
         return Jwts.builder()
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setSubject(String.valueOf(usuario))
+                .setSubject(String.valueOf(usuario.getId()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS256, key)
                 .compact();

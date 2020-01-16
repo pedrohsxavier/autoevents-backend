@@ -20,9 +20,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginResponse> realizarLogin(@Valid @RequestBody LoginRequest request,
-                                                       @RequestHeader(value = "Authorization") String token){
-        Usuario usuario = this.service.login(request.getEmail(), request.getSenha(), token);
+    public ResponseEntity<LoginResponse> realizarLogin(@Valid @RequestBody LoginRequest request){
+        Usuario usuario = this.service.login(request.getEmail(), request.getSenha());
         return ResponseEntity.ok(LoginResponse.from(usuario, "Bearer "));
     }
 }

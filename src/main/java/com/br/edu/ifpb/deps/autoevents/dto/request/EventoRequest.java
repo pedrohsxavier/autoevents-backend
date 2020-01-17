@@ -11,6 +11,7 @@ public class EventoRequest {
     private String pais;
     private LocalDate dataEvento;
     private double ingressoValor;
+    private Long usuarioId;
 
     public String getNome() {
         return nome;
@@ -44,13 +45,13 @@ public class EventoRequest {
         this.pais = pais;
     }
 
-//    public Long getUsuarioId() {
-//        return usuarioId;
-//    }
-//
-//    public void setUsuarioId(Long usuarioId) {
-//        this.usuarioId = usuarioId;
-//    }
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
 
     public LocalDate getDataEvento() {
         return dataEvento;

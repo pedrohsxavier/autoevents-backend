@@ -1,9 +1,12 @@
 package com.br.edu.ifpb.deps.autoevents.dto.response;
 
-import com.br.edu.ifpb.deps.autoevents.model.Evento;
+import java.time.LocalDate;
+import java.util.Set;
+
 import org.springframework.data.domain.Page;
 
-import java.time.LocalDate;
+import com.br.edu.ifpb.deps.autoevents.model.Evento;
+import com.br.edu.ifpb.deps.autoevents.model.Usuario;
 
 public class EventoResponse {
     private Long id;
@@ -14,6 +17,7 @@ public class EventoResponse {
     private Long usuarioId;
     private LocalDate dataEvento;
     private double ingressoValor;
+    private Set<Usuario> usuarios;
 
     public Long getId() {
         return id;
@@ -78,8 +82,16 @@ public class EventoResponse {
     public void setIngressoValor(double ingressoValor) {
         this.ingressoValor = ingressoValor;
     }
+    
+    public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
 
-    public static EventoResponse from (Evento evento) {
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public static EventoResponse from (Evento evento) {
         EventoResponse eventoResponse = new EventoResponse();
 
         eventoResponse.setNome(evento.getNome());
@@ -90,8 +102,9 @@ public class EventoResponse {
         eventoResponse.setId(evento.getId());
         eventoResponse.setIngressoValor(evento.getIngressoValor());
         //eventoResponse.setMontadoraId(evento.getMontadora().getId());
-        //eventoResponse.setUsuarioId(evento.getUsuario().getId());
-
+        eventoResponse.setUsuarioId(evento.getUsuarioId());
+//        eventoResponse.setUsuarios(evento.getUsuarios());
+        
         return eventoResponse;
     }
 
@@ -107,8 +120,9 @@ public class EventoResponse {
             eventoResponse.setId(evento.getId());
             eventoResponse.setIngressoValor(evento.getIngressoValor());
             //eventoResponse.setMontadoraId(evento.getMontadora().getId());
-            //eventoResponse.setUsuarioId(evento.getUsuario().getId());
-
+            eventoResponse.setUsuarioId(evento.getUsuarioId());
+//            eventoResponse.setUsuarios(evento.getUsuarios());
+            
             return eventoResponse;
         });
 

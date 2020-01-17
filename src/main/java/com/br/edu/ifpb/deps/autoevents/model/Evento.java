@@ -58,7 +58,10 @@ public class Evento {
             joinColumns = { @JoinColumn(name = "carro_id")},
             inverseJoinColumns = { @JoinColumn(name = "evento_id")})
     private Set<Carro> carros = new HashSet<>();
-
+    
+    @Column(nullable = false)
+    private Long usuarioId;
+    
     public Set<Usuario> getUsuarios() {
         return usuarios;
     }
@@ -131,6 +134,12 @@ public class Evento {
         this.descricao = descricao;
     }
 
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
 
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
+	}
 
 }

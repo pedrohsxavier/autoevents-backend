@@ -7,6 +7,7 @@ public class LoginResponse {
     private String nome;
     private String email;
     private String token;
+    private String id;
 
     public String getTipo() {
         return tipo;
@@ -39,14 +40,23 @@ public class LoginResponse {
     public void setToken(String token) {
         this.token = token;
     }
+    
+    public String getId() {
+		return id;
+	}
 
-    public static LoginResponse from (Usuario usuario, String tipo){
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public static LoginResponse from (Usuario usuario, String tipo){
         LoginResponse loginResponse = new LoginResponse();
 
         loginResponse.setEmail(usuario.getEmail());
         loginResponse.setNome(usuario.getNome());
         loginResponse.setToken(usuario.getToken());
         loginResponse.setTipo(tipo);
+        loginResponse.setId(usuario.getId() + "");
 
         return loginResponse;
     }

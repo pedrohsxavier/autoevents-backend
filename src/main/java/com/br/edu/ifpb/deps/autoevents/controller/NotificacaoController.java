@@ -7,7 +7,9 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class NotificacaoController {
 	
 	public void sendMessage(String message, String bandeira) throws IOException, TimeoutException {

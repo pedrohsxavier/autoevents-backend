@@ -31,6 +31,11 @@ public class EventoServiceTest {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private UsuarioRepository repository;
+
+    private Usuario usuario;
+
     private Faker faker;
 
     private EventoRequest request;
@@ -44,6 +49,7 @@ public class EventoServiceTest {
     @After
     public void end(){
         this.service.removerEvento(criar.getId());
+        this.repository.deleteAll();
     }
 
     @Test
@@ -138,9 +144,10 @@ public class EventoServiceTest {
 
     private EventoRequest requestTeste(){
         EventoRequest eventoRequest = new EventoRequest();
-        Usuario user = criarUsuario();
         faker = new Faker();
         Random random = new Random();
+
+        Usuario usuario = this.usuarioService.criarUsuario(criarUsuario());
 
         eventoRequest.setCidade(faker.address().cityName());
         eventoRequest.setDataEvento(LocalDate.of(2021, Month.APRIL, random.nextInt(27) + 1));
@@ -148,21 +155,21 @@ public class EventoServiceTest {
         eventoRequest.setIngressoValor(200);
         eventoRequest.setNome(faker.app().name());
         eventoRequest.setPais(faker.address().country());
- //       eventoRequest.setUsuarioId(user.getId());
+        eventoRequest.setUsuarioId(usuario.getId());
 
         return eventoRequest;
     }
 
-    private Usuario criarUsuario(){
+    private UsuarioRequest criarUsuario(){
 
         Faker faker = new Faker();
 
         UsuarioRequest usuario = new UsuarioRequest();
         usuario.setDataNascimento(LocalDate.of(1982, Month.JUNE, 1));
         usuario.setEmail(faker.internet().emailAddress());
-        usuario.setNome(faker.name().firstName());
+        usuario.setNome("admin");
         usuario.setSenha(faker.funnyName().name());
 
-        return this.usuarioService.criarUsuario(usuario);
+        return usuario;
     }
 }

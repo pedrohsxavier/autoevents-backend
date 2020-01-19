@@ -98,7 +98,7 @@ public class EventoResponse {
 			this.usuarios = this.usuarios.substring(0, this.usuarios.length() - 2);
 		}
 		this.usuarios += "]";
-		System.out.println(this.usuarios);
+		
 	}
 		
 
@@ -115,7 +115,7 @@ public class EventoResponse {
 			this.carros = this.carros.substring(0, this.carros.length() - 2);
 		}
 		this.carros += "]";
-		System.out.println(this.carros);
+		
 	}
 
 	public static EventoResponse from (Evento evento) {

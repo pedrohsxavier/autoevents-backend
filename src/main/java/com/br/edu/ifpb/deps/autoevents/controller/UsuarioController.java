@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class UsuarioController {
     private UsuarioService service;
 
@@ -22,7 +22,8 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest request) {
+    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest request) throws InterruptedException {
+    	System.out.println(request);
         Usuario usuario = this.service.criarUsuario(request);
         return ResponseEntity.ok(UsuarioResponse.from(usuario));
     }
@@ -34,14 +35,14 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponse> buscarUsuario(@Valid @PathVariable("id") Long id){
+    public ResponseEntity<UsuarioResponse> buscarUsuario(@Valid @PathVariable("id") Long id) throws InterruptedException{
         Usuario usuario = this.service.buscarUsuario(id);
         return ResponseEntity.ok(UsuarioResponse.from(usuario));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponse> atualizarUsuario(@Valid @PathVariable(value = "id") Long id,
-                                                            @Valid @RequestBody UsuarioRequest request) {
+                                                            @Valid @RequestBody UsuarioRequest request) throws InterruptedException {
         Usuario usuario = this.service.atualizarUsuario(id, request);
         return ResponseEntity.ok(UsuarioResponse.from(usuario));
     }

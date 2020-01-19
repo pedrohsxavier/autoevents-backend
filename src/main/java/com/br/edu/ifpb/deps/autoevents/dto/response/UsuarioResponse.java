@@ -1,9 +1,11 @@
 package com.br.edu.ifpb.deps.autoevents.dto.response;
 
-import com.br.edu.ifpb.deps.autoevents.model.Usuario;
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 
-import java.time.LocalDate;
+import com.br.edu.ifpb.deps.autoevents.model.Usuario;
+import com.br.edu.ifpb.deps.autoevents.service.ConsumidorService;
 
 public class UsuarioResponse {
     private Long id;
@@ -11,6 +13,7 @@ public class UsuarioResponse {
     private LocalDate dataNascimento;
     private String email;
     private String senha;
+    private String mensagens = "";
 
     public Long getId() {
         return id;
@@ -51,14 +54,32 @@ public class UsuarioResponse {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    public String getMensagens() {
+		return mensagens;
+	}
 
-    public static UsuarioResponse from (Usuario usuario) {
+	public void setMensagens(String mensagens) {
+		ConsumidorService cs = new ConsumidorService();
+		this.mensagens+= "[ " ;
+		for(int i = 0; i < cs.getMensagem().length; i++) {
+			this.mensagens+= cs.getMensagem()[i] + ", "; 
+		}
+		if (this.mensagens.contains(",")) {
+			this.mensagens = this.mensagens.substring(0, this.mensagens.length() - 2);
+		}
+		this.mensagens = mensagens;
+	}
+
+	public static UsuarioResponse from (Usuario usuario) throws InterruptedException {
         UsuarioResponse usuarioResponse = new UsuarioResponse();
         usuarioResponse.setDataNascimento(usuario.getDataNascimento());
         usuarioResponse.setNome(usuario.getNome());
         usuarioResponse.setId(usuario.getId());
         usuarioResponse.setEmail(usuario.getEmail());
         usuarioResponse.setSenha(usuario.getSenha());
+        usuarioResponse.setMensagens("");        
+        Thread.sleep(2000);        
 
         return usuarioResponse;
     }
@@ -72,7 +93,14 @@ public class UsuarioResponse {
             usuarioResponse.setId(usuario.getId());
             usuarioResponse.setEmail(usuario.getEmail());
             usuarioResponse.setSenha(usuario.getSenha());
-
+            usuarioResponse.setMensagens("");        
+            try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
             return usuarioResponse;
         });
         return usuariosResponse;

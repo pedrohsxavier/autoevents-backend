@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.server.ResponseStatusException;
@@ -60,7 +61,7 @@ public class UsuarioServiceTest {
         Assert.assertFalse(violations.isEmpty());
     }
 
-    @Test(expected = ResponseStatusException.class)
+    @Test(expected = DataIntegrityViolationException.class)
     public void cadastrarFalhaEmailIgualTest(){
         request = requestTeste();
         this.service.criarUsuario(request);
